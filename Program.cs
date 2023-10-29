@@ -6,7 +6,7 @@ class Program
 {
     private static void Main(string[] args)
     {
-        var homework = new ExerciseTwo();
+        var homework = new ExerciseThreeV2();
         homework.CompletingTask();
     }
 }
