@@ -1,4 +1,4 @@
-﻿using ItAcademiaCsh.Homework._23_10Homework4;
+﻿using ItAcademiaCsh.Homework._30_10Homework5;
 
 namespace ItAcademiaCsh;
 
@@ -6,7 +6,7 @@ class Program
 {
     private static void Main(string[] args)
     {
-        var homework = new ExerciseThree();
+        var homework = new ExerciseOne();
         homework.CompletingTask();
     }
 }
