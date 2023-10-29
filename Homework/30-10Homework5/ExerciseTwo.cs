@@ -27,7 +27,7 @@ public class ExerciseTwo : IHomework
             var lastIndex = text.LastIndexOf("h", StringComparison.Ordinal);
 
             text = text.Replace("h", "H");
-            char[] replacingText = text.ToCharArray();
+            var replacingText = text.ToCharArray();
             replacingText[firstIndex] = replacingText[lastIndex] = 'h';
             text = new string(replacingText);
 
