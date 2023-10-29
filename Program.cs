@@ -1,9 +1,12 @@
-﻿namespace ItAcademiaCsh;
+﻿using ItAcademiaCsh.Homework._23_10Homework4;
+
+namespace ItAcademiaCsh;
 
 class Program
 {
     private static void Main(string[] args)
     {
-        Console.ReadKey();
+        var homework = new ExerciseOne();
+        homework.CompletingTask();
     }
 }
