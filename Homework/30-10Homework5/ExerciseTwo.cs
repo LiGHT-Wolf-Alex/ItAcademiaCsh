@@ -23,15 +23,19 @@ public class ExerciseTwo : IHomework
         }
 
         {
-            var firstIndex = text.IndexOf("h", StringComparison.Ordinal) + 1;
+            var firstIndex = text.IndexOf("h", StringComparison.Ordinal);
             var lastIndex = text.LastIndexOf("h", StringComparison.Ordinal);
-            var replacingText = text.Substring(firstIndex, lastIndex).Replace("h", "H");
 
+            text = text.Replace("h", "H");
+            char[] replacingText = text.ToCharArray();
+            replacingText[firstIndex] = replacingText[lastIndex] = 'h';
+            text = new string(replacingText);
+
+            /* или var replacingText = text.Substring(firstIndex, lastIndex).Replace("h", "H");
             text = text[..(firstIndex)] + replacingText + text[(lastIndex - 1)..];
-            //или  text = text[..(firstIndex)] + text[firstIndex..lastIndex].Replace("h", "H") + text[(lastIndex - 1)..];
+            или  text = text[..(firstIndex)] + text[firstIndex..lastIndex].Replace("h", "H") + text[(lastIndex - 1)..];*/
         }
 
-        Console.WriteLine("Replacement result: ");
-        Console.WriteLine(text);
+        Console.Write($"Replacement result => {text}");
     }
 }
