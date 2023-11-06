@@ -18,30 +18,62 @@ public class ExerciseThreeV2 : IHomework
             return;
         }
 
-        if (!string.IsNullOrEmpty(text?.Trim()))
+        if (string.IsNullOrEmpty(text?.Trim()))
         {
-            text = Encrypt(text, encryptionStep);
-            Console.WriteLine($"Encrypted string => {text}");
-            Console.WriteLine($"Decrypted string => {Decrypt(text, encryptionStep)}");
+            Console.WriteLine("The line is empty");
+            return;
+        }
+        
+        Console.WriteLine("What would you like to do, encrypt and decrypt the message?");
+        Console.Write("press: e - encrypt or d - decrypt => ");
+
+        if (Console.ReadKey().Key == ConsoleKey.E)
+        {
+            Console.WriteLine($"\r\nEncrypted string => {Encrypt(text, encryptionStep)}");
+        }
+        else if (Console.ReadKey().Key == ConsoleKey.D)
+        {
+            Console.WriteLine($"\r\nDecrypted string => {Decrypt(text, encryptionStep)}");
         }
     }
 
     private string Encrypt(string text, int encryptionStep)
     {
         string encryptedText = "";
-        foreach (char itemChar in text)
+        foreach (var itemChar in text)
         {
             if (char.IsLetter(itemChar))
             {
+                var numberLetters = 32;
                 if (itemChar < 1000)
                 {
-                    char start = char.IsUpper(itemChar) ? 'A' : 'a';
-                    encryptedText += (char)((((itemChar + encryptionStep) - start) % 26) + start);
+                    numberLetters = 26;
+                    var start = char.IsUpper(itemChar) ? 'A' : 'a';
+                    encryptedText += (char)((((itemChar + encryptionStep) - start) % numberLetters) + start);
+                }
+                else if (itemChar is 'ё' or 'Ё')
+                {
+                    var start = char.IsUpper(itemChar) ? 'А' : 'а';
+                    var item = char.IsUpper(itemChar) ? 1046 : 1078;
+                    encryptedText += (char)((((itemChar + encryptionStep) - start) % numberLetters) + start);
                 }
                 else
                 {
-                    char start = char.IsUpper(itemChar) ? 'А' : 'а';
-                    encryptedText += (char)((((itemChar + encryptionStep) - start) % 32) + start);
+                    char start;
+                    int step;
+                    if (char.IsUpper(itemChar))
+                    {
+                        start = 'А';
+                        step = (itemChar < 1046) ? encryptionStep : encryptionStep + 1;
+                        encryptedText += (char)((((itemChar + step) - start) % numberLetters) + start);
+                    }
+                    else
+                    {
+                        start = 'а';
+                        step = (itemChar < 1078) ? encryptionStep : encryptionStep + 1;
+                        encryptedText += (char)((((itemChar + step) - start) % numberLetters) + start);
+                    }
+                    
                 }
             }
             else
@@ -55,20 +87,23 @@ public class ExerciseThreeV2 : IHomework
 
     private string Decrypt(string text, int encryptionStep)
     {
-        string encryptedText = "";
-        foreach (char itemChar in text)
+        var encryptedText = "";
+        foreach (var itemChar in text)
         {
             if (char.IsLetter(itemChar))
             {
+                int numberOfLetters;
                 if (itemChar < 1000)
                 {
-                    char start = char.IsUpper(itemChar) ? 'A' : 'a';
-                    encryptedText += (char)((((itemChar + (26 - encryptionStep)) - start) % 26) + start);
+                    numberOfLetters = 26;
+                    var start = char.IsUpper(itemChar) ? 'A' : 'a';
+                    encryptedText += (char)((((itemChar + (26 - encryptionStep)) - start) % numberOfLetters) + start);
                 }
                 else
                 {
-                    char start = char.IsUpper(itemChar) ? 'А' : 'а';
-                    encryptedText += (char)((((itemChar + (32 - encryptionStep)) - start) % 32) + start);
+                    numberOfLetters = 32;
+                    var start = char.IsUpper(itemChar) ? 'А' : 'а';
+                    encryptedText += (char)((((itemChar + (32 - encryptionStep)) - start) % numberOfLetters) + start);
                 }
             }
             else
@@ -76,7 +111,7 @@ public class ExerciseThreeV2 : IHomework
                 encryptedText += itemChar;
             }
         }
-
+        
         return encryptedText;
     }
 }
