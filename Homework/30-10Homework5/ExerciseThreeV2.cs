@@ -64,16 +64,15 @@ public class ExerciseThreeV2 : IHomework
                     if (char.IsUpper(itemChar))
                     {
                         start = 'А';
-                        step = (itemChar < 1046) ? encryptionStep : encryptionStep + 1;
+                        step = (itemChar <= 1046) ? encryptionStep : encryptionStep + 1;
                         encryptedText += (char)((((itemChar + step) - start) % numberLetters) + start);
                     }
                     else
                     {
                         start = 'а';
-                        step = (itemChar < 1078) ? encryptionStep : encryptionStep + 1;
+                        step = (itemChar <= 1078) ? encryptionStep : encryptionStep + 1;
                         encryptedText += (char)((((itemChar + step) - start) % numberLetters) + start);
                     }
-                    
                 }
             }
             else

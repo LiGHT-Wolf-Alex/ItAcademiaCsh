@@ -57,7 +57,7 @@ class Program
 {
     static void _Main()
     {
-        Warehouse warehouse = new Warehouse();
+        var warehouse = new Warehouse();
 
         var product1 = new Product { ProductName = "Cargo1", StoreName = "Store1", TheCostOfTheGoodsD = 100 };
         var product2 = new Product { ProductName = "Cargo2", StoreName = "Store2", TheCostOfTheGoodsD = 200 };

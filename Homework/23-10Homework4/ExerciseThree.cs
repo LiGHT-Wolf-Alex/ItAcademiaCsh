@@ -17,7 +17,7 @@ public class ExerciseThree : IHomework
 
         Console.WriteLine();
 
-        bool isAllElementsUnique = true;
+        var isAllElementsUnique = true;
 
         Array.Sort(myArray);
         for (int i = 0, quantity; i < myArray.Length; i++)
