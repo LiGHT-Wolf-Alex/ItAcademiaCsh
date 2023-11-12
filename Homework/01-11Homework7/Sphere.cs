@@ -17,7 +17,7 @@ public class Sphere
 
     public Sphere(double radius)
     {
-        _radius = radius;
+        Radius = radius;
         _x = 0;
         _y = 0;
         _z = 0;
@@ -25,7 +25,7 @@ public class Sphere
 
     public Sphere(double radius, double x, double y, double z)
     {
-        _radius = radius;
+        Radius = radius;
         _x = x;
         _y = y;
         _z = z;
@@ -33,8 +33,19 @@ public class Sphere
 
     public double Radius
     {
-        get { return _radius; }
-        set { _radius = value; }
+        get => _radius;
+        set
+        {
+            if (value > 0)
+            {
+                _radius = value;
+            }
+            else
+            {
+                _radius = 0;
+                Console.WriteLine("Радиус, не может быть меньше 1");
+            }
+        }
     }
 
     public double GetVolume()
