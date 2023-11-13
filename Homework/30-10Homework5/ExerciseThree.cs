@@ -20,17 +20,29 @@ public class ExerciseThree : IHomework
             return;
         }
 
-        if (!string.IsNullOrEmpty(text?.Trim()))
+        if (string.IsNullOrEmpty(text?.Trim()))
         {
-            text = CaesarEncryption(text, encryptionStep);
-            Console.WriteLine(text);
+            Console.WriteLine("The line is empty");
+            return;
+        }
+
+        Console.WriteLine("What would you like to do, encrypt and decrypt the message?");
+        Console.Write("press: e - encrypt or d - decrypt => ");
+        
+        if (Console.ReadKey().Key == ConsoleKey.E)
+        {
+            Console.WriteLine($"\r\nEncrypted string => {CaesarEncryption(text, encryptionStep)}");
+        }
+        else if (Console.ReadKey().Key == ConsoleKey.D)
+        {
+            Console.WriteLine($"\r\nDecrypted string => {CaesarEncryption(text, -(encryptionStep))}");
         }
     }
 
     private string CaesarEncryption(string text, int encryptionStep)
     {
         var encryptedText = "";
-        var isUpercase = false;
+        var isUppercase = false;
 
         foreach (var itemChar in text)
         {
@@ -40,7 +52,7 @@ public class ExerciseThree : IHomework
                 if (char.IsUpper(itemChar))
                 {
                     itemByfChar = char.ToLower(itemChar);
-                    isUpercase = true;
+                    isUppercase = true;
                 }
                 else
                 {
@@ -51,13 +63,13 @@ public class ExerciseThree : IHomework
                 {
                     if (i < 32 && itemByfChar == Alphabet[i])
                     {
-                        encryptedText += Encryption(Alphabet[..32], in encryptionStep, in i, ref isUpercase);
+                        encryptedText += Encryption(Alphabet[..32], in encryptionStep, in i, ref isUppercase);
                         break;
                     }
 
                     if (i >= 32 && itemByfChar == Alphabet[i])
                     {
-                        encryptedText += Encryption(Alphabet[32..], in encryptionStep, i - 32, ref isUpercase);
+                        encryptedText += Encryption(Alphabet[32..], in encryptionStep, i - 32, ref isUppercase);
                         break;
                     }
                 }
@@ -71,13 +83,13 @@ public class ExerciseThree : IHomework
         return encryptedText;
     }
 
-    private string Encryption(string alphabet, in int encryptionStep, in int i, ref bool isUpercase)
+    private string Encryption(string alphabet, in int encryptionStep, in int i, ref bool isUppercase)
     {
         if (i + encryptionStep <= alphabet.Length - 1)
         {
-            if (isUpercase)
+            if (isUppercase)
             {
-                isUpercase = false;
+                isUppercase = false;
                 return alphabet[i + encryptionStep].ToString().ToUpper();
             }
 
@@ -90,12 +102,41 @@ public class ExerciseThree : IHomework
             wentBeyondBoundaries = (i + encryptionStep) - alphabet.Length;
         }
 
-        if (isUpercase)
+        if (isUppercase)
         {
-            isUpercase = false;
+            isUppercase = false;
             return alphabet[wentBeyondBoundaries].ToString().ToUpper();
         }
 
         return alphabet[wentBeyondBoundaries].ToString();
     }
+    
+    private string Decrypt(string alphabet, in int encryptionStep, in int i, ref bool isUppercase)
+    {
+        if (i + encryptionStep <= alphabet.Length - 1)
+        {
+            if (isUppercase)
+            {
+                isUppercase = false;
+                return alphabet[i + encryptionStep].ToString().ToUpper();
+            }
+
+            return alphabet[i + encryptionStep].ToString();
+        }
+
+        var wentBeyondBoundaries = (i + encryptionStep) - alphabet.Length;
+        while (wentBeyondBoundaries > alphabet.Length - 1)
+        {
+            wentBeyondBoundaries = (i + encryptionStep) - alphabet.Length;
+        }
+
+        if (isUppercase)
+        {
+            isUppercase = false;
+            return alphabet[wentBeyondBoundaries].ToString().ToUpper();
+        }
+
+        return alphabet[wentBeyondBoundaries].ToString();
+    }
+    
 }

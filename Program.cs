@@ -1,12 +1,18 @@
-﻿using ItAcademiaCsh.Homework._30_10Homework5;
+﻿using ItAcademiaCsh.ControlWork._13_11;
 
 namespace ItAcademiaCsh;
 
 class Program
 {
-    private static void Main(string[] args)
+    private static void Main()
     {
-        var homework = new ExerciseThreeV2();
-        homework.CompletingTask();
+        MyStack stack = new MyStack(5);
+
+        stack.Push(10);
+        stack.Push(20);
+        stack.Push(30);
+
+        Console.WriteLine(stack.Pop());
+        Console.WriteLine(stack.Pop());
     }
 }
