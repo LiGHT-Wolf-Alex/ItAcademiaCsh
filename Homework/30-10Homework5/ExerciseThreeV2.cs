@@ -4,6 +4,7 @@ public class ExerciseThreeV2 : IHomework
 {
     public string DateIssueTask { get; } = "30.10.2023";
     public char TaskNumber { get; } = '3';
+    public readonly string AlphabetRus = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
 
     public void CompletingTask()
     {
@@ -23,15 +24,16 @@ public class ExerciseThreeV2 : IHomework
             Console.WriteLine("The line is empty");
             return;
         }
-        
+
         Console.WriteLine("What would you like to do, encrypt and decrypt the message?");
         Console.Write("press: e - encrypt or d - decrypt => ");
 
-        if (Console.ReadKey().Key == ConsoleKey.E)
+        var key = Console.ReadKey();
+        if (key.Key == ConsoleKey.E)
         {
             Console.WriteLine($"\r\nEncrypted string => {Encrypt(text, encryptionStep)}");
         }
-        else if (Console.ReadKey().Key == ConsoleKey.D)
+        else if (key.Key == ConsoleKey.D)
         {
             Console.WriteLine($"\r\nDecrypted string => {Decrypt(text, encryptionStep)}");
         }
@@ -39,40 +41,19 @@ public class ExerciseThreeV2 : IHomework
 
     private string Encrypt(string text, int encryptionStep)
     {
-        string encryptedText = "";
+        var encryptedText = "";
+
         foreach (var itemChar in text)
         {
             if (char.IsLetter(itemChar))
             {
-                var numberLetters = 32;
                 if (itemChar < 1000)
                 {
-                    numberLetters = 26;
-                    var start = char.IsUpper(itemChar) ? 'A' : 'a';
-                    encryptedText += (char)((((itemChar + encryptionStep) - start) % numberLetters) + start);
-                }
-                else if (itemChar is 'ё' or 'Ё')
-                {
-                    var start = char.IsUpper(itemChar) ? 'А' : 'а';
-                    var item = char.IsUpper(itemChar) ? 1046 : 1078;
-                    encryptedText += (char)((((itemChar + encryptionStep) - start) % numberLetters) + start);
+                    encryptedText += EnglishEncoder(itemChar, encryptionStep);
                 }
                 else
                 {
-                    char start;
-                    int step;
-                    if (char.IsUpper(itemChar))
-                    {
-                        start = 'А';
-                        step = (itemChar <= 1046) ? encryptionStep : encryptionStep + 1;
-                        encryptedText += (char)((((itemChar + step) - start) % numberLetters) + start);
-                    }
-                    else
-                    {
-                        start = 'а';
-                        step = (itemChar <= 1078) ? encryptionStep : encryptionStep + 1;
-                        encryptedText += (char)((((itemChar + step) - start) % numberLetters) + start);
-                    }
+                    encryptedText += RussianEncoder(itemChar, encryptionStep);
                 }
             }
             else
@@ -87,22 +68,21 @@ public class ExerciseThreeV2 : IHomework
     private string Decrypt(string text, int encryptionStep)
     {
         var encryptedText = "";
+
         foreach (var itemChar in text)
         {
             if (char.IsLetter(itemChar))
             {
-                int numberOfLetters;
+                int numberLetters;
                 if (itemChar < 1000)
                 {
-                    numberOfLetters = 26;
-                    var start = char.IsUpper(itemChar) ? 'A' : 'a';
-                    encryptedText += (char)((((itemChar + (26 - encryptionStep)) - start) % numberOfLetters) + start);
+                    numberLetters = 26;
+                    encryptedText += EnglishEncoder(itemChar, numberLetters - encryptionStep);
                 }
                 else
                 {
-                    numberOfLetters = 32;
-                    var start = char.IsUpper(itemChar) ? 'А' : 'а';
-                    encryptedText += (char)((((itemChar + (32 - encryptionStep)) - start) % numberOfLetters) + start);
+                    numberLetters = 33;
+                    encryptedText += RussianEncoder(itemChar, numberLetters - encryptionStep);
                 }
             }
             else
@@ -110,7 +90,35 @@ public class ExerciseThreeV2 : IHomework
                 encryptedText += itemChar;
             }
         }
-        
+
         return encryptedText;
+    }
+
+    private char RussianEncoder(char item, int encryptionStep)
+    {
+        var isLargeText = false;
+        const int numberLetters = 33;
+
+        if (char.IsUpper(item))
+        {
+            isLargeText = true;
+            item = char.ToLower(item);
+        }
+
+        var index = 0;
+        while (item != AlphabetRus[index])
+        {
+            index++;
+        }
+
+        int letterNumber = (index + encryptionStep) % numberLetters;
+        return isLargeText ? char.ToUpper(AlphabetRus[letterNumber]) : AlphabetRus[letterNumber];
+    }
+
+    private char EnglishEncoder(char item, int encryptionStep)
+    {
+        const int numberLetters = 26;
+        var start = char.IsUpper(item) ? 'A' : 'a';
+        return (char)((item + encryptionStep - start) % numberLetters + start);
     }
 }
