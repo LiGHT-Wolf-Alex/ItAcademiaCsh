@@ -5,21 +5,26 @@ public static class IntExtensions
     public static string ToWords(this int number)
     {
 
-        var byfer = number;
-        while (byfer != 0)
+        var byfer = number.ToString();
+        var text = "";
+        
+        foreach (var VARIABLE in byfer)
         {
-            
-            
+            text += " "  + VARIABLE switch
+            {
+                '0' => "ноль",
+                '1' => "один",
+                '2' => "два",
+                '3' => "три",
+                '4' => "четыре",
+                '5' => "пять",
+                '6' => "шесть",
+                '7' => "семь",
+                '8' => "восемь",
+                '9' => "девять"
+            };
         }
-        string[] units =
-        {
-            "ноль", "один", "два", "три", "четыре",
-            "пять", "шесть", "семь", "восемь", "девять"
-        };
-        if (number == 0 )
-        {
-            return "минус " + Math.Abs(number).ToWords();
-        }
-        return units[number];
+        
+        return text;
     }
 }
