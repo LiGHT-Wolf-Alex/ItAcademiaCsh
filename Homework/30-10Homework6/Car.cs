@@ -4,7 +4,7 @@ public class Car
 {
     private string _color;
     private string _type;
-    private int _year;
+    private int? _year;
 
     public Car(string color, string type, int year)
     {
@@ -35,6 +35,14 @@ public class Car
 
     public void SetYear(int year)
     {
-        _year = year;
+        if (year >= 1886)
+        {
+            _year = year;
+        }
+        else
+        {
+            _year = null;
+            Console.WriteLine("Год выпуска не может быть меньше < 1886 г.");
+        }
     }
 }
