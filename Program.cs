@@ -1,4 +1,4 @@
-﻿using ItAcademiaCsh.ControlWork._13_11;
+﻿using ItAcademiaCsh.Homework._30_10Homework6;
 
 namespace ItAcademiaCsh;
 
@@ -6,8 +6,7 @@ class Program
 {
     private static void Main()
     {
-        int number = 1234;
-        string result = number.ToWords();
-        Console.WriteLine(result);
+        var test = new Soda();
+        Console.WriteLine(test.ToString());
     }
 }

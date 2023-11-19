@@ -11,13 +11,6 @@ public class Soda
 
     public override string ToString()
     {
-        if (_flavor != null)
-        {
-            return $"У вас газировка с {_flavor} вкусом";
-        }
-        else
-        {
-            return "У вас обычная газировка";
-        }
+        return string.IsNullOrWhiteSpace(_flavor) ? "У вас обычная газировка" : $"У вас газировка с {_flavor} вкусом";
     }
 }
