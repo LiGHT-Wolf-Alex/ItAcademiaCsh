@@ -2,34 +2,16 @@
 
 public class Math
 {
-    public void Add(double item1, double item2)
-    {
-        double result = item1 + item2;
-        Console.WriteLine($"Результат сложения: {result}");
-    }
+    public double Add(double item1, double item2) =>  item1 + item2;
 
-    public void Subtract(double item1, double item2)
-    {
-        double result = item1 - item2;
-        Console.WriteLine($"Результат вычитания: {result}");
-    }
+    public double Subtract(double item1, double item2) => item1 - item2;
 
-    public void Multiply(double item1, double item2)
-    {
-        double result = item1 * item2;
-        Console.WriteLine($"Результат умножения: {result}");
-    }
+    public double Multiply(double item1, double item2) => item1 * item2;
 
-    public void Divide(double item1, double item2)
+    public double? Divide(double item1, double item2)
     {
-        if (item2 != 0)
-        {
-            double result = item1 / item2;
-            Console.WriteLine($"Результат деления: {result}");
-        }
-        else
-        {
-            Console.WriteLine("Ошибка: деление на ноль невозможно");
-        }
+        if (item2 != 0) return item1 / item2;
+        Console.WriteLine("Деление на 0");
+        return null;
     }
 }

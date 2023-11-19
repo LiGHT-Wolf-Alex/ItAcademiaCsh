@@ -25,12 +25,28 @@ public class Car
 
     public void SetColor(string color)
     {
-        _color = color;
+        if (string.IsNullOrWhiteSpace(color))
+        {
+            Console.WriteLine("Поскольку у вас нет своего мнения, машина будет розовой");
+            _color = "Pink";
+        }
+        else
+        {
+            _color = color;
+        }
     }
 
     public void SetType(string type)
     {
-        _type = type;
+        if (string.IsNullOrWhiteSpace(type))
+        {
+            Console.WriteLine("Поскольку у вас нет своего мнения, у вас будет трактор");
+            _type = "Tractordrdr";
+        }
+        else
+        {
+            _type = type;
+        }
     }
 
     public void SetYear(int year)
@@ -41,7 +57,6 @@ public class Car
         }
         else
         {
-            _year = null;
             Console.WriteLine("Год выпуска не может быть меньше < 1886 г.");
         }
     }
