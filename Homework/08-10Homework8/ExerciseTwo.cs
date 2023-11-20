@@ -137,6 +137,7 @@ class Bus
                         break;
                     }
                 }
+                SeatAvailability = true;
             }
             else
             {
@@ -146,7 +147,6 @@ class Bus
 
         if (noPassenger != "")
         {
-            SeatAvailability = false;
             throw new Exception("Пассажиры не найдены: " + noPassenger);
         }
     }
