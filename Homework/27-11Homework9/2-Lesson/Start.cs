@@ -1,10 +1,8 @@
-﻿using ItAcademiaCsh.Homework._27_11Homework9._2_Lesson;
+﻿namespace ItAcademiaCsh.Homework._27_11Homework9._2_Lesson;
 
-namespace ItAcademiaCsh;
-
-class Program
+public class Start
 {
-    private static void Main()
+    public void StartingProgram()
     {
         var devices = new List<IMultimediaDevice>
         {
@@ -34,7 +32,7 @@ class Program
         }
     }
 
-    public static void ControlDevice(IMultimediaDevice device)
+    private void ControlDevice(IMultimediaDevice device)
     {
         Console.Clear();
         Console.WriteLine("1. Воспроизведение\n2. Остановка\n3. Пауза\n4. Следующий трек\n5. Увеличение громкости" +
