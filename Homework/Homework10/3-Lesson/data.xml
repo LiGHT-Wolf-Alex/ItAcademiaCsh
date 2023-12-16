@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<People>
+  <Person>
+    <Name>John Smith</Name>
+    <Birthday>02.10.1990</Birthday>
+    <Height>175</Height>
+    <Weight>76.5</Weight>
+    <Car>true</Car>
+    <Languages>
+      <Language>C++</Language>
+      <Language>Python</Language>
+    </Languages>
+  </Person>
+  <Person>
+    <Name>Alexey Alexeev</Name>
+    <Birthday>05.06.1986</Birthday>
+    <Height>197</Height>
+    <Weight>101.2</Weight>
+    <Car>false</Car>
+    <Languages>
+      <Language>Pascal</Language>
+      <Language>Delphi</Language>
+    </Languages>
+  </Person>
+  <Person>
+    <Name>Maria Ivanova</Name>
+    <Birthday>28.08.1998</Birthday>
+    <Height>165</Height>
+    <Weight>56.1</Weight>
+    <Car>true</Car>
+    <Languages>
+      <Language>C#</Language>
+      <Language>C++</Language>
+      <Language>C</Language>
+    </Languages>
+  </Person>
+</People>
